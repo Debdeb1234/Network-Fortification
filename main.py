@@ -27,7 +27,7 @@ def execute_xss_script():
         pwnxss_commands.append((choice, value))
 
     # Constructing the final PwnXSS command
-    command = ["python", "D:/Firewall stuff/NF1-Dhanesh-s/NF1-Dhanesh-s/PwnXSS/PwnXSS/pwnxss.py"]
+    command = ["python", "PwnXSS/PwnXSS/pwnxss.py"]
     for option, value in pwnxss_commands:
         if option == '1':
             command.extend(["-u", value])
@@ -87,7 +87,7 @@ def select_sqlmap_command(target_url):
         if choice == '1':
             proxy_address = input("Enter the proxy address (e.g., http://proxy_address:port): ")
             sqlmap_command = [
-                "python", r"D:\Firewall stuff\NF1-Dhanesh-s\NF1-Dhanesh-s\sqlmap-master\sqlmap.py", "-u", target_url,
+                "python", r"C:\Users\kisho\OneDrive\Documents\GitHub\Network-Fortification\sqlmap-master\sqlmap.py", "-u", target_url,
                 "--proxy", proxy_address, "--batch"
             ]
             execute_sqlmap_script(target_url, sqlmap_command)
@@ -97,14 +97,14 @@ def select_sqlmap_command(target_url):
             username = input("Enter the basic auth username: ")
             password = input("Enter the basic auth password: ")
             sqlmap_command = [
-                "python", r"D:\Firewall stuff\NF1-Dhanesh-s\NF1-Dhanesh-s\sqlmap-master\sqlmap.py", "-u", target_url,
+                "python", r"C:\Users\kisho\OneDrive\Documents\GitHub\Network-Fortification\sqlmap-master\sqlmap.py", "-u", target_url,
                 "-data=param1={}&param2={}".format(param1, param2), "-p", "param1", "--auth-type", "basic",
                 "--auth-cred", "{}:{}".format(username, password), "--batch"
             ]
             execute_sqlmap_script(target_url, sqlmap_command)
         elif choice == '3':
             sqlmap_command = [
-                "python", r"D:\Firewall stuff\NF1-Dhanesh-s\NF1-Dhanesh-s\sqlmap-master\sqlmap.py", "-u", target_url,
+                "python", r"C:\Users\kisho\OneDrive\Documents\GitHub\Network-Fortification\sqlmap-master\sqlmap.py", "-u", target_url,
                 "--batch"
             ]
             execute_sqlmap_script(target_url, sqlmap_command)
