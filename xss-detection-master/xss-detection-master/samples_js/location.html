@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <title>DOM XSS vulnerability using dom.location</title>
+    <style>
+        .search {
+            width:50%;
+            margin: auto;
+            padding-top:10px;
+        }
+        .reflect{
+            text-align: center;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="search input-group mb-3">
+        <input id="search" type="text" class="form-control" placeholder="Search blogs" aria-label="Recipient's username"
+            aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="searchbtn">Search</button>
+    </div>
+
+    <div id="reflect" class="reflect">
+    </div>
+
+    <script>
+        function search() {
+            const query = document.getElementById('search').value 
+            location.href = location.href.split('?')[0] + "?q=" + query
+        }
+        document.getElementById('searchbtn').addEventListener('click',search)
+
+        const query = (new URLSearchParams(location.search)).get('q');
+        if(query) {
+            document.getElementById("reflect").innerHTML = `Search results for ${query}`
+        }
+    </script>
+</body>
+
+</html>
