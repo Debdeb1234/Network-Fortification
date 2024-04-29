@@ -26,6 +26,7 @@ def execute_xss_script():
         value = input(f"Enter value for option {choice}: ")
         pwnxss_commands.append((choice, value))
 
+    # Constructing the final PwnXSS command
     command = ["python", "C:\\Users\\kisho\\OneDrive\\Documents\\GitHub\\Network-Fortification\\PwnXSS\\PwnXSS\\pwnxss.py"]
     for option, value in pwnxss_commands:
         if option == '1':
@@ -166,7 +167,7 @@ def show_menu():
     print("Menu:")
     print("1. Headers")
     print("2. XSS")
-    print("3. Check for SQL Injection")
+    print("3. Check for SQL Injection (Using sqlmap)")
     print("4. Quit")
 
 # Main loop and menu
