@@ -10,8 +10,6 @@ from lib.core import *
 from random import randint
 from lib.crawler.crawler import *
 epilog="""
-Github: https://www.github.com/pwn0sec/PwnXSS
-Version: 0.5 Final
 """
 def check(getopt):
 	payload=int(getopt.payload_level)
@@ -47,7 +45,7 @@ def start():
 	
 	getopt=parse.parse_args()
 	print(logo)
-	Log.info("Starting PwnXSS...")
+	Log.info("Starting XSS...")
 	if getopt.u:
 		core.main(getopt.u,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
 		
@@ -57,15 +55,7 @@ def start():
 		core.main(getopt.single,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
 		
 	elif getopt.about:
-		print("""
-***************
-Project: PwnXSS
-License: MIT
-Author: Security Executions Code
-Last updates: 2019 may 26
-Note: Take your own RISK
-****************
-"""+epilog)
+		print(""""""+epilog)
 	else:
 		parse.print_help()
 		

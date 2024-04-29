@@ -1,7 +1,7 @@
 import subprocess
 
 def execute_xss_script():
-    print("PwnXSS Commands:")
+    print("XSS Commands:")
     print("1. -u <target>")
     print("2. --payload")
     print("3. --depth")
@@ -9,7 +9,7 @@ def execute_xss_script():
     print("5. --proxy")
     print("6. --about")
     print("7. --cookie")
-    print("8. Execute PwnXSS")
+    print("8. Execute XSS")
 
     pwnxss_commands = []
     
@@ -26,7 +26,6 @@ def execute_xss_script():
         value = input(f"Enter value for option {choice}: ")
         pwnxss_commands.append((choice, value))
 
-    # Constructing the final PwnXSS command
     command = ["python", "C:\\Users\\kisho\\OneDrive\\Documents\\GitHub\\Network-Fortification\\PwnXSS\\PwnXSS\\pwnxss.py"]
     for option, value in pwnxss_commands:
         if option == '1':
@@ -167,7 +166,7 @@ def show_menu():
     print("Menu:")
     print("1. Headers")
     print("2. XSS")
-    print("3. Check for SQL Injection (Using sqlmap)")
+    print("3. Check for SQL Injection")
     print("4. Quit")
 
 # Main loop and menu

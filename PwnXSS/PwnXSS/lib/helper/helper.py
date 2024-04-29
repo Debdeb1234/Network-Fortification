@@ -26,14 +26,8 @@ def session(proxies,headers,cookie):
 	r.cookies.update(json.loads(cookie))
 	return r
 
-logo=G+"""██████╗ ██╗    ██╗███╗   ██╗██╗  ██╗███████╗███████╗
-██╔══██╗██║    ██║████╗  ██║╚██╗██╔╝██╔════╝██╔════╝
-██████╔╝██║ █╗ ██║██╔██╗ ██║ ╚███╔╝ ███████╗███████╗ %s
-██╔═══╝ ██║███╗██║██║╚██╗██║ ██╔██╗ ╚════██║╚════██║ %s
-██║     ╚███╔███╔╝██║ ╚████║██╔╝ ██╗███████║███████║
-╚═╝      ╚══╝╚══╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝╚══════╝
-<<<<<<< STARTING >>>>>>>
-"""%(R+"{v0.5 Final}"+G,underline+C+"https://github.com/pwn0sec/PwnXSS"+N+G)
+logo=G+"""XSS STARTING NOW
+"""
 	
 ##=======
 """%(R+"{v0.5 Final}"+G,underline+C+"https://github.com/pwn0sec/PwnXSS"+N+G)
