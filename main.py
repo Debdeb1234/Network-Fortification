@@ -45,13 +45,16 @@ def execute_xss_script():
             command.extend(["--cookie", value])
 
     try:
-        subprocess.run(command, check=True)
+        subprocess.run(command, check=True, timeout=8)  # Set timeout to 8 seconds
+    except subprocess.TimeoutExpired:
+        print("XSS execution timed out.")
     except subprocess.CalledProcessError as e:
         print(f"Error executing PwnXSS command: {e}")
     except FileNotFoundError:
         print("PwnXSS script not found.")
     except KeyboardInterrupt:
         print("Execution interrupted.")
+
 
 def select_sqlmap_command(target_url):
     sqlmap_command = ["python", "C:\\Users\\kisho\\OneDrive\\Documents\\GitHub\\Network-Fortification\\sqlmap-master\\sqlmap.py"]  # Define sqlmap_command here
@@ -61,8 +64,8 @@ def select_sqlmap_command(target_url):
         print("2. Basic authentication")
         print("3. Default")
         print("4. --dbs")
-        print("5. -tables")
-        print("6. -columns -D DBNAME -T TABLENAME")
+        print("5. --tables")
+        print("6. --columns -D DBNAME -T TABLENAME")
         print("7. --dump")
         print("8. --dump-all")
         print("9. --threads=THREADS")
@@ -87,58 +90,58 @@ def select_sqlmap_command(target_url):
             value = input(f"Enter value for option {choice}: ")
             if choice == '1':
                 proxy_address = value
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, "--proxy", proxy_address, "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--proxy", proxy_address, "--batch"])
             elif choice == '2':
                 username = input("Enter the basic auth username: ")
                 password = input("Enter the basic auth password: ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, "--auth-type", "basic", "--auth-cred", f"{username}:{password}", "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--auth-type", "basic", "--auth-cred", f"{username}:{password}", "--batch"])
             elif choice == '3':
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--batch"])
             elif choice == '4':
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, "--dbs", "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--dbs", "--batch"])
             elif choice == '5':
                 database = input("Enter the database name: ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"-D {database}", "--tables", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"-D {database}", "--tables", "--batch"])
             elif choice == '6':
                 database = input("Enter the database name: ")
                 table = input("Enter the table name: ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"-D {database} -T {table}", "--columns", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"-D {database} -T {table}", "--columns", "--batch"])
             elif choice == '7':
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, "--dump", "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--dump", "--batch"])
             elif choice == '8':
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, "--dump-all", "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--dump-all", "--batch"])
             elif choice == '9':
                 threads = input("Enter number of threads: ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"--threads={threads}", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"--threads={threads}", "--batch"])
             elif choice == '10':
                 level = input("Enter scan level (1-5): ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"--level={level}", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"--level={level}", "--batch"])
             elif choice == '11':
                 risk = input("Enter risk level (1-3): ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"--risk={risk}", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"--risk={risk}", "--batch"])
             elif choice == '12':
                 tamper_script = input("Enter path to tamper script: ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"--tamper={tamper_script}", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"--tamper={tamper_script}", "--batch"])
             elif choice == '13':
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, "--os-shell", "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--os-shell", "--batch"])
             elif choice == '14':
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--batch"])
             elif choice == '15':
                 proxy_address = input("Enter the proxy address (e.g., http://proxy_address:port): ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"--proxy={proxy_address}", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"--proxy={proxy_address}", "--batch"])
             elif choice == '16':
                 crawl_depth = input("Enter the crawl depth: ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"--crawl={crawl_depth}", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"--crawl={crawl_depth}", "--batch"])
             elif choice == '17':
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, "--flush-session", "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--flush-session", "--batch"])
             elif choice == '18':
                 cookie = input("Enter the cookie string: ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"--cookie={cookie}", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"--cookie={cookie}", "--batch"])
             elif choice == '19':
-                sqlmap_command.extend(["python","sqlmap.py", "-u", target_url, "--exclude-sysdbs", "--batch"])
+                sqlmap_command.extend(["-u", target_url, "--exclude-sysdbs", "--batch"])
             elif choice == '20':
                 regex = input("Enter the regex pattern to exclude: ")
-                sqlmap_command.extend(["python", "sqlmap.py", "-u", target_url, f"--exclude=\"{regex}\"", "--batch"])
+                sqlmap_command.extend(["-u", target_url, f"--exclude=\"{regex}\"", "--batch"])
             return sqlmap_command
         else:
             print("Invalid choice. Please select a valid option.")
